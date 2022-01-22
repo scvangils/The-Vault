@@ -4,7 +4,7 @@
 package com.example.thevault.service;
 
 
-import com.example.thevault.domain.mapping.repository.RootRepository;
+import com.example.thevault.database.mapping.repository.RootRepository;
 
 import com.example.thevault.domain.model.*;
 
@@ -25,8 +25,6 @@ import java.nio.charset.StandardCharsets;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**

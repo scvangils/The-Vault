@@ -1,6 +1,6 @@
 package com.example.thevault.service;
 
-import com.example.thevault.domain.mapping.repository.RootRepository;
+import com.example.thevault.database.mapping.repository.RootRepository;
 import com.example.thevault.domain.model.Klant;
 import com.example.thevault.domain.model.Rekening;
 import com.example.thevault.support.exceptions.UserNotExistsException;

@@ -1,6 +1,6 @@
 package com.example.thevault.service;
 
-import com.example.thevault.domain.mapping.repository.RootRepository;
+import com.example.thevault.database.mapping.repository.RootRepository;
 import com.example.thevault.domain.model.CryptoWaarde;
 import com.example.thevault.domain.model.Cryptomunt;
 import com.example.thevault.support.api.CryptoAPI;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class CryptoWaardeService {

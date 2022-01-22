@@ -3,7 +3,7 @@
 
 package com.example.thevault.support.authorization;
 
-import com.example.thevault.domain.mapping.dao.KlantDAO;
+import com.example.thevault.database.mapping.dao.KlantDAO;
 import com.example.thevault.domain.model.Klant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.slf4j.Logger;

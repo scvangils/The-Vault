@@ -3,19 +3,16 @@
 
 package com.example.thevault.service;
 
-import com.example.thevault.domain.mapping.dao.JDBCRekeningDAO;
-import com.example.thevault.domain.mapping.dao.JDBCTransactieDAO;
-import com.example.thevault.domain.mapping.repository.RootRepository;
+import com.example.thevault.database.mapping.dao.JDBCRekeningDAO;
+import com.example.thevault.database.mapping.dao.JDBCTransactieDAO;
+import com.example.thevault.database.mapping.repository.RootRepository;
 import com.example.thevault.domain.model.*;
-import com.example.thevault.support.exceptions.BalanceTooLowException;
-import com.example.thevault.support.exceptions.NotEnoughCryptoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import com.example.thevault.domain.model.Klant;
 import com.example.thevault.domain.model.Rekening;
 
-import static com.jayway.jsonpath.internal.path.PathCompiler.fail;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;

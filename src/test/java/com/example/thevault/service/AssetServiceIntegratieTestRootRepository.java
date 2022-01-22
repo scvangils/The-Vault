@@ -1,14 +1,13 @@
 package com.example.thevault.service;
 
-import com.example.thevault.domain.mapping.dao.*;
-import com.example.thevault.domain.mapping.repository.RootRepository;
+import com.example.thevault.database.mapping.dao.*;
+import com.example.thevault.database.mapping.repository.RootRepository;
 import com.example.thevault.domain.model.Asset;
 import com.example.thevault.domain.model.Cryptomunt;
 import com.example.thevault.domain.model.Klant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

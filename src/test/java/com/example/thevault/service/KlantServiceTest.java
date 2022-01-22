@@ -1,6 +1,6 @@
 package com.example.thevault.service;
 
-import com.example.thevault.domain.mapping.repository.RootRepository;
+import com.example.thevault.database.mapping.repository.RootRepository;
 import com.example.thevault.domain.model.Asset;
 import com.example.thevault.domain.model.CryptoWaarde;
 import com.example.thevault.domain.model.Cryptomunt;

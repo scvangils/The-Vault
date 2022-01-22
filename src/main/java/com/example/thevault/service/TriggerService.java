@@ -3,7 +3,7 @@
 
 package com.example.thevault.service;
 
-import com.example.thevault.domain.mapping.repository.RootRepository;
+import com.example.thevault.database.mapping.repository.RootRepository;
 import com.example.thevault.domain.model.*;
 import com.example.thevault.support.exceptions.*;
 import org.apache.commons.math3.util.Precision;
