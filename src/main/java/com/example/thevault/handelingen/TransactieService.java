@@ -3,10 +3,8 @@
 
 package com.example.thevault.handelingen;
 
-import com.example.thevault.controller.rest_api_controller.Bank;
-import com.example.thevault.controller.rest_api_controller.Cryptomunt;
-import com.example.thevault.controller.rest_api_controller.Gebruiker;
-import com.example.thevault.controller.rest_api_controller.RootRepository;
+import com.example.thevault.financieel.Cryptomunt;
+import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.klant.KlantService;
 import com.example.thevault.financieel.AssetService;
 import com.example.thevault.financieel.RekeningService;

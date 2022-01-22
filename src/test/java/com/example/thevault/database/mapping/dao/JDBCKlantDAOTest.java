@@ -4,7 +4,7 @@
 package com.example.thevault.database.mapping.dao;
 
 import com.example.thevault.klant.Adres;
-import com.example.thevault.controller.rest_api_controller.Gebruiker;
+import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.klant.JDBCKlantDAO;
 import com.example.thevault.klant.Klant;
 import org.junit.jupiter.api.BeforeEach;

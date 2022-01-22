@@ -1,9 +1,11 @@
 // Created by carme
 // Creation date 01/12/2021
 
-package com.example.thevault.controller.rest_api_controller;
+package com.example.thevault.handelingen;
 
-import com.example.thevault.handelingen.*;
+import com.example.thevault.financieel.Cryptomunt;
+import com.example.thevault.financieel.CryptomuntDAO;
+import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.financieel.Asset;
 import com.example.thevault.klant.Adres;
 import com.example.thevault.klant.AdresDAO;

@@ -1,7 +1,7 @@
 // Created by carme
 // Creation date 30/11/2021
 
-package com.example.thevault.controller.rest_api_controller;
+package com.example.thevault.klant;
 
 import com.example.thevault.financieel.Asset;
 import com.example.thevault.financieel.Rekening;

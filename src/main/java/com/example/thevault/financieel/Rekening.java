@@ -3,7 +3,7 @@
 
 package com.example.thevault.financieel;
 
-import com.example.thevault.controller.rest_api_controller.Gebruiker;
+import com.example.thevault.klant.Gebruiker;
 import net.minidev.json.annotate.JsonIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

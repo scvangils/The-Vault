@@ -3,8 +3,7 @@
 
 package com.example.thevault.financieel;
 
-import com.example.thevault.controller.rest_api_controller.Cryptomunt;
-import com.example.thevault.controller.rest_api_controller.Gebruiker;
+import com.example.thevault.klant.Gebruiker;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.slf4j.Logger;

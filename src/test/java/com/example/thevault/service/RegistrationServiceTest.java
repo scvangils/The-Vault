@@ -2,7 +2,7 @@ package com.example.thevault.service;
 
 import com.example.thevault.klant.*;
 import com.example.thevault.financieel.Rekening;
-import com.example.thevault.financieel.RegistrationDto;
+import com.example.thevault.klant.RegistrationDto;
 import com.example.thevault.financieel.RekeningService;
 import com.example.thevault.support.hashing.BCryptWachtwoordHash;
 import org.junit.jupiter.api.BeforeEach;

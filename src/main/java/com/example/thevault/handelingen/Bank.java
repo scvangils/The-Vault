@@ -1,8 +1,9 @@
 // Created by carme
 // Creation date 30/11/2021
 
-package com.example.thevault.controller.rest_api_controller;
+package com.example.thevault.handelingen;
 
+import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.financieel.Asset;
 import com.example.thevault.financieel.Rekening;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class Bank extends Gebruiker{
+public class Bank extends Gebruiker {
 
     private static final Bank instance = new Bank(null, null);
 

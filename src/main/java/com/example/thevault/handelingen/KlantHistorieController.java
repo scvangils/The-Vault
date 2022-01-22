@@ -3,7 +3,7 @@
 
 package com.example.thevault.handelingen;
 
-import com.example.thevault.controller.rest_api_controller.BasisApiController;
+import com.example.thevault.klant.BasisApiController;
 import com.example.thevault.klant.LoginService;
 import com.example.thevault.klant.RegistrationService;
 import com.example.thevault.klant.authorization.AuthorizationService;

@@ -3,10 +3,6 @@
 
 package com.example.thevault.klant;
 
-import com.example.thevault.controller.rest_api_controller.BasisApiController;
-import com.example.thevault.financieel.RegistrationDto;
-import com.example.thevault.financieel.WelkomDTO;
-import com.example.thevault.financieel.LoginDto;
 import com.example.thevault.handelingen.TransactieService;
 import com.example.thevault.klant.authorization.AuthorizationService;
 import com.example.thevault.klant.authorization.TokenKlantCombinatie;

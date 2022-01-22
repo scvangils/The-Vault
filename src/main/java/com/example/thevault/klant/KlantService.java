@@ -4,11 +4,10 @@
 package com.example.thevault.klant;
 
 
-import com.example.thevault.controller.rest_api_controller.Cryptomunt;
-import com.example.thevault.controller.rest_api_controller.Gebruiker;
-import com.example.thevault.controller.rest_api_controller.RootRepository;
+import com.example.thevault.financieel.Cryptomunt;
+import com.example.thevault.handelingen.RootRepository;
 
-import com.example.thevault.controller.rest_api_controller.CryptoDto;
+import com.example.thevault.financieel.CryptoDto;
 import com.example.thevault.financieel.Asset;
 import com.example.thevault.support.BSNvalidator;
 import com.example.thevault.support.exceptions.AgeTooLowException;

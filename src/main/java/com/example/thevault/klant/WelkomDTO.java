@@ -1,10 +1,9 @@
 // Created by E.S. Olthof
 // 20211012
 
-package com.example.thevault.financieel;
+package com.example.thevault.klant;
 
-import com.example.thevault.controller.rest_api_controller.CryptoDto;
-import com.example.thevault.klant.Klant;
+import com.example.thevault.financieel.CryptoDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

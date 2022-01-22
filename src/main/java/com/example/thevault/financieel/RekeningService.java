@@ -1,7 +1,7 @@
 package com.example.thevault.financieel;
 
-import com.example.thevault.controller.rest_api_controller.RootRepository;
-import com.example.thevault.controller.rest_api_controller.Gebruiker;
+import com.example.thevault.handelingen.RootRepository;
+import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.klant.Klant;
 import com.example.thevault.support.exceptions.UserNotExistsException;
 import net.minidev.json.annotate.JsonIgnore;

@@ -3,8 +3,7 @@
 
 package com.example.thevault.financieel;
 
-import com.example.thevault.controller.rest_api_controller.Cryptomunt;
-import com.example.thevault.controller.rest_api_controller.Gebruiker;
+import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.support.exceptions.AssetNotExistsException;
 import com.example.thevault.support.exceptions.NotEnoughCryptoException;
 import com.fasterxml.jackson.annotation.JsonIgnore;

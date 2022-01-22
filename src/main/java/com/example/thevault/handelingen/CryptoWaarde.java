@@ -3,7 +3,7 @@
 
 package com.example.thevault.handelingen;
 
-import com.example.thevault.controller.rest_api_controller.Cryptomunt;
+import com.example.thevault.financieel.Cryptomunt;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

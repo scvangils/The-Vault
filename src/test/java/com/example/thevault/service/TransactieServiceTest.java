@@ -3,14 +3,14 @@
 
 package com.example.thevault.service;
 
-import com.example.thevault.controller.rest_api_controller.Cryptomunt;
+import com.example.thevault.financieel.Cryptomunt;
 import com.example.thevault.financieel.*;
 import com.example.thevault.handelingen.CryptoWaardeService;
 import com.example.thevault.handelingen.Transactie;
 import com.example.thevault.handelingen.TransactieService;
 import com.example.thevault.klant.KlantService;
 import com.example.thevault.handelingen.JDBCTransactieDAO;
-import com.example.thevault.controller.rest_api_controller.RootRepository;
+import com.example.thevault.handelingen.RootRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

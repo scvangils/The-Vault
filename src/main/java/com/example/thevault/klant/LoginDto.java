@@ -1,4 +1,4 @@
-package com.example.thevault.financieel;
+package com.example.thevault.klant;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.slf4j.LoggerFactory;

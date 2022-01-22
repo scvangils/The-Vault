@@ -1,6 +1,6 @@
 package com.example.thevault.database.mapping.dao;
 
-import com.example.thevault.controller.rest_api_controller.Cryptomunt;
+import com.example.thevault.financieel.Cryptomunt;
 import com.example.thevault.handelingen.JDBCTriggerDAO;
 import com.example.thevault.handelingen.Trigger;
 import com.example.thevault.handelingen.TriggerKoper;
@@ -13,7 +13,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
 
-import com.example.thevault.controller.rest_api_controller.Gebruiker;
+import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.klant.Klant;
 import org.junit.jupiter.api.BeforeEach;
 

@@ -3,7 +3,7 @@
 
 //hoe zorg ik ervoor dat alle crypto's in de DTO komen?
 
-package com.example.thevault.controller.rest_api_controller;
+package com.example.thevault.financieel;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.slf4j.Logger;

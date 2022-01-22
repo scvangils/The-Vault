@@ -1,4 +1,4 @@
-package com.example.thevault.controller.rest_api_controller;
+package com.example.thevault.financieel;
 
 import java.util.List;
 

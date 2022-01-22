@@ -8,7 +8,7 @@ import com.auth0.jwt.JWT;
 
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.thevault.controller.rest_api_controller.RootRepository;
+import com.example.thevault.handelingen.RootRepository;
 import com.example.thevault.klant.Klant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,8 +1,8 @@
 package com.example.thevault.service;
 
-import com.example.thevault.controller.rest_api_controller.RootRepository;
+import com.example.thevault.handelingen.RootRepository;
 import com.example.thevault.financieel.Asset;
-import com.example.thevault.controller.rest_api_controller.Cryptomunt;
+import com.example.thevault.financieel.Cryptomunt;
 import com.example.thevault.klant.Klant;
 import com.example.thevault.financieel.AssetDAO;
 import com.example.thevault.financieel.AssetService;

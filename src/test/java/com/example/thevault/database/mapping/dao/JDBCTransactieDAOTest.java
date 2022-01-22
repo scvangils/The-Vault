@@ -4,7 +4,7 @@
 
 package com.example.thevault.database.mapping.dao;
 
-import com.example.thevault.controller.rest_api_controller.Cryptomunt;
+import com.example.thevault.financieel.Cryptomunt;
 import com.example.thevault.financieel.Asset;
 import com.example.thevault.handelingen.JDBCTransactieDAO;
 import com.example.thevault.handelingen.Transactie;

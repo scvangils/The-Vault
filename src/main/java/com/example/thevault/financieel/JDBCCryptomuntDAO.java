@@ -1,7 +1,7 @@
 // Created by carme
 // Creation date 11/12/2021
 
-package com.example.thevault.controller.rest_api_controller;
+package com.example.thevault.financieel;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.slf4j.Logger;

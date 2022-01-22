@@ -1,7 +1,7 @@
 package com.example.thevault.database.mapping.dao;
 
-import com.example.thevault.controller.rest_api_controller.Cryptomunt;
-import com.example.thevault.controller.rest_api_controller.Gebruiker;
+import com.example.thevault.financieel.Cryptomunt;
+import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.financieel.Asset;
 import com.example.thevault.klant.Klant;
 import com.example.thevault.financieel.AssetDAO;

@@ -1,6 +1,6 @@
 package com.example.thevault.database.mapping.dao;
 
-import com.example.thevault.controller.rest_api_controller.Cryptomunt;
+import com.example.thevault.financieel.Cryptomunt;
 import com.example.thevault.handelingen.JDBCCryptoWaardeDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
 package com.example.thevault.financieel;
 
-import com.example.thevault.controller.rest_api_controller.Gebruiker;
+import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.klant.JDBCKlantDAO;
 import com.example.thevault.support.exceptions.BalanceTooLowException;
 import net.minidev.json.annotate.JsonIgnore;

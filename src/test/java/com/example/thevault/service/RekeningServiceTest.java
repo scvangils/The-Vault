@@ -1,6 +1,6 @@
 package com.example.thevault.service;
 
-import com.example.thevault.controller.rest_api_controller.RootRepository;
+import com.example.thevault.handelingen.RootRepository;
 import com.example.thevault.klant.Klant;
 import com.example.thevault.financieel.Rekening;
 import com.example.thevault.financieel.RekeningService;

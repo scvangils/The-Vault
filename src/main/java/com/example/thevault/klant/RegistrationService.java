@@ -3,7 +3,6 @@
 
 package com.example.thevault.klant;
 
-import com.example.thevault.financieel.RegistrationDto;
 import com.example.thevault.financieel.RekeningService;
 import com.example.thevault.support.exceptions.IncorrectFormatException;
 import org.slf4j.Logger;

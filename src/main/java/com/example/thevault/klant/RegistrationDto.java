@@ -6,9 +6,8 @@
  * en dat er niet onnodige en eventueel gevoelige informatie wordt verstuurd naar de frontend.
  */
 
-package com.example.thevault.financieel;
+package com.example.thevault.klant;
 
-import com.example.thevault.klant.Klant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

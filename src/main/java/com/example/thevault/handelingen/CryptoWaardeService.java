@@ -1,7 +1,6 @@
 package com.example.thevault.handelingen;
 
-import com.example.thevault.controller.rest_api_controller.RootRepository;
-import com.example.thevault.controller.rest_api_controller.Cryptomunt;
+import com.example.thevault.financieel.Cryptomunt;
 import com.example.thevault.handelingen.api.CryptoAPI;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.slf4j.Logger;

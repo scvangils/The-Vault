@@ -1,10 +1,8 @@
 // Created by carme
 // Creation date 01/12/2021
 
-package com.example.thevault.controller.rest_api_controller;
+package com.example.thevault.klant;
 
-import com.example.thevault.klant.LoginService;
-import com.example.thevault.klant.RegistrationService;
 import com.example.thevault.handelingen.TransactieService;
 import com.example.thevault.klant.authorization.AuthorizationService;
 import org.slf4j.Logger;

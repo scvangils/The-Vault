@@ -3,8 +3,7 @@
 
 package com.example.thevault.klant;
 
-import com.example.thevault.controller.rest_api_controller.RootRepository;
-import com.example.thevault.financieel.LoginDto;
+import com.example.thevault.handelingen.RootRepository;
 import com.example.thevault.financieel.RekeningService;
 import com.example.thevault.klant.authorization.AuthorizationService;
 import com.example.thevault.support.hashing.BCryptWachtwoordHash;
