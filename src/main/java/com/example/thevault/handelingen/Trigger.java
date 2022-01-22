@@ -140,7 +140,7 @@ public abstract class Trigger {
         if (this == o) return true;
         if (!(o instanceof Trigger)) return false;
         Trigger trigger = (Trigger) o;
-        return triggerId == trigger.triggerId && Objects.equals(gebruiker.getGebruikerId(), trigger.gebruiker.gebruikerId)
+        return triggerId == trigger.triggerId && Objects.equals(gebruiker.getGebruikerId(), trigger.gebruiker.getGebruikerId())
                 && Objects.equals(cryptomunt.getId(), trigger.cryptomunt.getId()) && Objects.equals(datum, trigger.datum);
     }
 
