@@ -1,8 +1,9 @@
 package com.example.thevault.service;
 
-import com.example.thevault.database.mapping.repository.RootRepository;
-import com.example.thevault.domain.model.Klant;
-import com.example.thevault.domain.model.Rekening;
+import com.example.thevault.controller.rest_api_controller.RootRepository;
+import com.example.thevault.klant.Klant;
+import com.example.thevault.financieel.Rekening;
+import com.example.thevault.financieel.RekeningService;
 import com.example.thevault.support.exceptions.UserNotExistsException;
 import org.iban4j.CountryCode;
 import org.iban4j.Iban;

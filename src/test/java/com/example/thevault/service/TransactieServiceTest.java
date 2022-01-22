@@ -3,15 +3,18 @@
 
 package com.example.thevault.service;
 
-import com.example.thevault.database.mapping.dao.JDBCRekeningDAO;
-import com.example.thevault.database.mapping.dao.JDBCTransactieDAO;
-import com.example.thevault.database.mapping.repository.RootRepository;
-import com.example.thevault.domain.model.*;
+import com.example.thevault.controller.rest_api_controller.Cryptomunt;
+import com.example.thevault.financieel.*;
+import com.example.thevault.handelingen.CryptoWaardeService;
+import com.example.thevault.handelingen.Transactie;
+import com.example.thevault.handelingen.TransactieService;
+import com.example.thevault.klant.KlantService;
+import com.example.thevault.handelingen.JDBCTransactieDAO;
+import com.example.thevault.controller.rest_api_controller.RootRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import com.example.thevault.domain.model.Klant;
-import com.example.thevault.domain.model.Rekening;
+import com.example.thevault.klant.Klant;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

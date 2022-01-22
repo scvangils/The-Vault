@@ -1,6 +1,10 @@
 package com.example.thevault.database.mapping.dao;
 
-import com.example.thevault.domain.model.*;
+import com.example.thevault.controller.rest_api_controller.Cryptomunt;
+import com.example.thevault.handelingen.JDBCTriggerDAO;
+import com.example.thevault.handelingen.Trigger;
+import com.example.thevault.handelingen.TriggerKoper;
+import com.example.thevault.handelingen.TriggerVerkoper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -9,8 +13,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
 
-import com.example.thevault.domain.model.Gebruiker;
-import com.example.thevault.domain.model.Klant;
+import com.example.thevault.controller.rest_api_controller.Gebruiker;
+import com.example.thevault.klant.Klant;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.assertj.core.api.Assertions.*;

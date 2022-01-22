@@ -1,14 +1,14 @@
 package com.example.thevault.controller.rest_api_controller;
 
-import com.example.thevault.domain.model.Adres;
-import com.example.thevault.domain.model.Klant;
-import com.example.thevault.domain.model.Rekening;
-import com.example.thevault.domain.transfer.LoginDto;
-import com.example.thevault.service.*;
-import com.example.thevault.domain.transfer.RegistrationDto;
+import com.example.thevault.handelingen.CryptoHistorischService;
+import com.example.thevault.handelingen.TransactieService;
+import com.example.thevault.klant.*;
+import com.example.thevault.financieel.Rekening;
+import com.example.thevault.financieel.LoginDto;
+import com.example.thevault.financieel.RegistrationDto;
 import com.example.thevault.support.BSNvalidator;
-import com.example.thevault.support.authorization.AuthorizationService;
-import com.example.thevault.support.authorization.TokenKlantCombinatie;
+import com.example.thevault.klant.authorization.AuthorizationService;
+import com.example.thevault.klant.authorization.TokenKlantCombinatie;
 import com.example.thevault.support.hashing.BCryptWachtwoordHash;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

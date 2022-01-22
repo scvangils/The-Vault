@@ -1,8 +1,21 @@
 package com.example.thevault.database.mapping.repository;
 
-import com.example.thevault.database.mapping.dao.*;
-import com.example.thevault.domain.model.*;
-import com.example.thevault.service.KlantService;
+import com.example.thevault.controller.rest_api_controller.Cryptomunt;
+import com.example.thevault.controller.rest_api_controller.CryptomuntDAO;
+import com.example.thevault.controller.rest_api_controller.Gebruiker;
+import com.example.thevault.controller.rest_api_controller.RootRepository;
+import com.example.thevault.financieel.Asset;
+import com.example.thevault.handelingen.CryptoWaarde;
+import com.example.thevault.handelingen.CryptoWaardeDAO;
+import com.example.thevault.handelingen.TransactieDAO;
+import com.example.thevault.handelingen.TriggerDAO;
+import com.example.thevault.klant.AdresDAO;
+import com.example.thevault.klant.Klant;
+import com.example.thevault.klant.KlantDAO;
+import com.example.thevault.financieel.AssetDAO;
+import com.example.thevault.financieel.Rekening;
+import com.example.thevault.financieel.RekeningDAO;
+import com.example.thevault.klant.KlantService;
 import com.example.thevault.support.exceptions.AssetNotExistsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

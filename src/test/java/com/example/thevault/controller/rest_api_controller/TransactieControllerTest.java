@@ -1,10 +1,10 @@
 package com.example.thevault.controller.rest_api_controller;
 
-import com.example.thevault.domain.model.Bank;
-import com.example.thevault.domain.transfer.TransactiePaginaDto;
-import com.example.thevault.domain.transfer.TransactieStartDto;
-import com.example.thevault.service.*;
-import com.example.thevault.support.authorization.AuthorizationService;
+import com.example.thevault.handelingen.*;
+import com.example.thevault.klant.KlantService;
+import com.example.thevault.klant.LoginService;
+import com.example.thevault.klant.RegistrationService;
+import com.example.thevault.klant.authorization.AuthorizationService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;

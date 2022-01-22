@@ -1,9 +1,9 @@
 package com.example.thevault.service;
 
-import com.example.thevault.domain.model.Adres;
-import com.example.thevault.domain.model.Klant;
-import com.example.thevault.domain.model.Rekening;
-import com.example.thevault.domain.transfer.RegistrationDto;
+import com.example.thevault.klant.*;
+import com.example.thevault.financieel.Rekening;
+import com.example.thevault.financieel.RegistrationDto;
+import com.example.thevault.financieel.RekeningService;
 import com.example.thevault.support.hashing.BCryptWachtwoordHash;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

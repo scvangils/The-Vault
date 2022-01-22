@@ -3,11 +3,10 @@
 
 package com.example.thevault.controller.rest_api_controller;
 
-import com.example.thevault.service.LoginService;
-import com.example.thevault.service.RegistrationService;
-import com.example.thevault.service.KlantService;
-import com.example.thevault.service.TransactieService;
-import com.example.thevault.support.authorization.AuthorizationService;
+import com.example.thevault.klant.LoginService;
+import com.example.thevault.klant.RegistrationService;
+import com.example.thevault.handelingen.TransactieService;
+import com.example.thevault.klant.authorization.AuthorizationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;

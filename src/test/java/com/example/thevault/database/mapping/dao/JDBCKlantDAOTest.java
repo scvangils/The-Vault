@@ -3,9 +3,10 @@
 
 package com.example.thevault.database.mapping.dao;
 
-import com.example.thevault.domain.model.Adres;
-import com.example.thevault.domain.model.Gebruiker;
-import com.example.thevault.domain.model.Klant;
+import com.example.thevault.klant.Adres;
+import com.example.thevault.controller.rest_api_controller.Gebruiker;
+import com.example.thevault.klant.JDBCKlantDAO;
+import com.example.thevault.klant.Klant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

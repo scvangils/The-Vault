@@ -1,11 +1,12 @@
 package com.example.thevault.service;
 
-import com.example.thevault.database.mapping.repository.RootRepository;
-import com.example.thevault.domain.model.Asset;
-import com.example.thevault.domain.model.CryptoWaarde;
-import com.example.thevault.domain.model.Cryptomunt;
-import com.example.thevault.domain.model.Klant;
-import com.example.thevault.domain.transfer.AssetDto;
+import com.example.thevault.controller.rest_api_controller.RootRepository;
+import com.example.thevault.financieel.Asset;
+import com.example.thevault.handelingen.CryptoWaarde;
+import com.example.thevault.controller.rest_api_controller.Cryptomunt;
+import com.example.thevault.klant.Klant;
+import com.example.thevault.financieel.AssetDto;
+import com.example.thevault.klant.KlantService;
 import com.example.thevault.support.BSNvalidator;
 import com.example.thevault.support.exceptions.AgeTooLowException;
 import com.example.thevault.support.exceptions.IncorrectBSNException;

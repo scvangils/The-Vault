@@ -1,8 +1,12 @@
 package com.example.thevault.service;
 
-import com.example.thevault.database.mapping.repository.RootRepository;
-import com.example.thevault.domain.model.*;
-import com.example.thevault.domain.transfer.AssetDto;
+import com.example.thevault.controller.rest_api_controller.Cryptomunt;
+import com.example.thevault.controller.rest_api_controller.RootRepository;
+import com.example.thevault.financieel.Asset;
+import com.example.thevault.financieel.AssetDto;
+import com.example.thevault.handelingen.CryptoWaarde;
+import com.example.thevault.klant.Klant;
+import com.example.thevault.financieel.AssetService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

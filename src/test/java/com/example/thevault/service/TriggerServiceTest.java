@@ -1,7 +1,13 @@
 package com.example.thevault.service;
 
-import com.example.thevault.database.mapping.repository.RootRepository;
-import com.example.thevault.domain.model.*;
+import com.example.thevault.controller.rest_api_controller.Bank;
+import com.example.thevault.controller.rest_api_controller.Cryptomunt;
+import com.example.thevault.controller.rest_api_controller.Gebruiker;
+import com.example.thevault.controller.rest_api_controller.RootRepository;
+import com.example.thevault.financieel.Asset;
+import com.example.thevault.handelingen.*;
+import com.example.thevault.klant.Klant;
+import com.example.thevault.klant.KlantService;
 import com.example.thevault.support.BSNvalidator;
 import com.example.thevault.support.exceptions.SchaduwAssetException;
 import com.example.thevault.support.exceptions.SchaduwSaldoException;

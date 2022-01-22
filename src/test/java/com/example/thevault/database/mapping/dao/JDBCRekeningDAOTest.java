@@ -1,7 +1,8 @@
 package com.example.thevault.database.mapping.dao;
 
-import com.example.thevault.domain.model.Klant;
-import com.example.thevault.domain.model.Rekening;
+import com.example.thevault.klant.Klant;
+import com.example.thevault.financieel.JDBCRekeningDAO;
+import com.example.thevault.financieel.Rekening;
 import com.example.thevault.support.BSNvalidator;
 import com.example.thevault.support.exceptions.BalanceTooLowException;
 import org.assertj.core.data.Percentage;

@@ -4,8 +4,8 @@
 package com.example.thevault.support.data;
 
 
-import com.example.thevault.domain.model.Adres;
-import com.example.thevault.domain.model.Klant;
+import com.example.thevault.klant.Adres;
+import com.example.thevault.klant.Klant;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
