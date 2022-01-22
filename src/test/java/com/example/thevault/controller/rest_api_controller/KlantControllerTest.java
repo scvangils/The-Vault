@@ -9,7 +9,7 @@ import com.example.thevault.klant.RegistrationDto;
 import com.example.thevault.support.BSNvalidator;
 import com.example.thevault.klant.authorization.AuthorizationService;
 import com.example.thevault.klant.authorization.TokenKlantCombinatie;
-import com.example.thevault.support.hashing.BCryptWachtwoordHash;
+import com.example.thevault.klant.BCryptWachtwoordHash;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package com.example.thevault.support.exceptions;
+package com.example.thevault.financieel;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

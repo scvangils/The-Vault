@@ -4,7 +4,6 @@
 package com.example.thevault.klant;
 
 import com.example.thevault.financieel.RekeningService;
-import com.example.thevault.support.exceptions.IncorrectFormatException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

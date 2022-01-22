@@ -2,7 +2,7 @@
 // Creation date 01/12/2021
 // aanpassing door Wim 20211207
 
-package com.example.thevault.support.exceptions;
+package com.example.thevault.klant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

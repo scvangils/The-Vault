@@ -1,7 +1,7 @@
 // Created by S.C. van Gils
 // Creation date 1-12-2021
 
-package com.example.thevault.support.exceptions;
+package com.example.thevault.klant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -4,8 +4,7 @@
 package com.example.thevault.financieel;
 
 import com.example.thevault.klant.Gebruiker;
-import com.example.thevault.support.exceptions.AssetNotExistsException;
-import com.example.thevault.support.exceptions.NotEnoughCryptoException;
+import com.example.thevault.handelingen.NotEnoughCryptoException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

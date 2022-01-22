@@ -8,10 +8,10 @@ import com.example.thevault.klant.Klant;
 import com.example.thevault.financieel.AssetDto;
 import com.example.thevault.klant.KlantService;
 import com.example.thevault.support.BSNvalidator;
-import com.example.thevault.support.exceptions.AgeTooLowException;
-import com.example.thevault.support.exceptions.IncorrectBSNException;
-import com.example.thevault.support.exceptions.PasswordNotSuitableException;
-import com.example.thevault.support.hashing.BCryptWachtwoordHash;
+import com.example.thevault.klant.AgeTooLowException;
+import com.example.thevault.klant.IncorrectBSNException;
+import com.example.thevault.klant.PasswordNotSuitableException;
+import com.example.thevault.klant.BCryptWachtwoordHash;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 

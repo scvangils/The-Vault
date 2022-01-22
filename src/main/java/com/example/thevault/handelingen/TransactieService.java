@@ -8,8 +8,6 @@ import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.klant.KlantService;
 import com.example.thevault.financieel.AssetService;
 import com.example.thevault.financieel.RekeningService;
-import com.example.thevault.support.exceptions.BalanceTooLowException;
-import com.example.thevault.support.exceptions.NotEnoughCryptoException;
 import com.example.thevault.financieel.Asset;
 import net.minidev.json.annotate.JsonIgnore;
 import org.slf4j.Logger;

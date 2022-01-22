@@ -4,7 +4,7 @@ import com.example.thevault.klant.Klant;
 import com.example.thevault.financieel.JDBCRekeningDAO;
 import com.example.thevault.financieel.Rekening;
 import com.example.thevault.support.BSNvalidator;
-import com.example.thevault.support.exceptions.BalanceTooLowException;
+import com.example.thevault.handelingen.BalanceTooLowException;
 import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

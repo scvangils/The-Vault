@@ -1,4 +1,4 @@
-package com.example.thevault.support.hashing;
+package com.example.thevault.klant;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 

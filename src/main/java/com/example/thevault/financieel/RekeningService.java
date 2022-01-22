@@ -3,7 +3,6 @@ package com.example.thevault.financieel;
 import com.example.thevault.handelingen.RootRepository;
 import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.klant.Klant;
-import com.example.thevault.support.exceptions.UserNotExistsException;
 import net.minidev.json.annotate.JsonIgnore;
 import org.iban4j.CountryCode;
 import org.iban4j.Iban;

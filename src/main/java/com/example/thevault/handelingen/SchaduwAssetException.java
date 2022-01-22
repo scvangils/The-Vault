@@ -1,7 +1,7 @@
 // Created by S.C. van Gils
-// Creation date 7-12-2021
+// Creation date 19-1-2022
 
-package com.example.thevault.support.exceptions;
+package com.example.thevault.handelingen;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,10 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
-public class AgeTooLowException extends RuntimeException{
+public class SchaduwAssetException extends RuntimeException{
 
-    //TODO JavaDoc
-    public AgeTooLowException(String message){
+    public SchaduwAssetException(String message){
         super(message);
     }
 }

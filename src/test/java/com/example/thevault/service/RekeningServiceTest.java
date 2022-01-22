@@ -4,7 +4,7 @@ import com.example.thevault.handelingen.RootRepository;
 import com.example.thevault.klant.Klant;
 import com.example.thevault.financieel.Rekening;
 import com.example.thevault.financieel.RekeningService;
-import com.example.thevault.support.exceptions.UserNotExistsException;
+import com.example.thevault.financieel.UserNotExistsException;
 import org.iban4j.CountryCode;
 import org.iban4j.Iban;
 import org.junit.jupiter.api.BeforeAll;

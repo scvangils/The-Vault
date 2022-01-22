@@ -6,8 +6,6 @@ package com.example.thevault.klant;
 import com.example.thevault.handelingen.TransactieService;
 import com.example.thevault.klant.authorization.AuthorizationService;
 import com.example.thevault.klant.authorization.TokenKlantCombinatie;
-import com.example.thevault.support.exceptions.LoginFailedException;
-import com.example.thevault.support.exceptions.RefreshJWTFailedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;

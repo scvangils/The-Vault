@@ -2,7 +2,7 @@ package com.example.thevault.financieel;
 
 import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.klant.JDBCKlantDAO;
-import com.example.thevault.support.exceptions.BalanceTooLowException;
+import com.example.thevault.handelingen.BalanceTooLowException;
 import net.minidev.json.annotate.JsonIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,5 +1,6 @@
 package com.example.thevault.support.hashing;
 
+import com.example.thevault.klant.BCryptWachtwoordHash;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;

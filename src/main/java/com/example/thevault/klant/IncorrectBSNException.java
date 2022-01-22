@@ -1,7 +1,7 @@
 // Created by S.C. van Gils
 // Creation date 2-12-2021
 
-package com.example.thevault.support.exceptions;
+package com.example.thevault.klant;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

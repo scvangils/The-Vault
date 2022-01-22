@@ -5,7 +5,7 @@ import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.financieel.Asset;
 import com.example.thevault.klant.Klant;
 import com.example.thevault.financieel.AssetDAO;
-import com.example.thevault.support.exceptions.NotEnoughCryptoException;
+import com.example.thevault.handelingen.NotEnoughCryptoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

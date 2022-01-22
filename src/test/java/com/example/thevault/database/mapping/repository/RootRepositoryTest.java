@@ -16,7 +16,7 @@ import com.example.thevault.financieel.AssetDAO;
 import com.example.thevault.financieel.Rekening;
 import com.example.thevault.financieel.RekeningDAO;
 import com.example.thevault.klant.KlantService;
-import com.example.thevault.support.exceptions.AssetNotExistsException;
+import com.example.thevault.financieel.AssetNotExistsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

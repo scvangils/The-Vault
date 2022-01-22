@@ -14,7 +14,7 @@ import com.example.thevault.klant.KlantDAO;
 import com.example.thevault.financieel.AssetDAO;
 import com.example.thevault.financieel.Rekening;
 import com.example.thevault.financieel.RekeningDAO;
-import com.example.thevault.support.exceptions.AssetNotExistsException;
+import com.example.thevault.financieel.AssetNotExistsException;
 import net.minidev.json.annotate.JsonIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
