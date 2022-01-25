@@ -3,8 +3,10 @@
 
 package com.example.thevault.klant;
 
-import com.example.thevault.handelingen.RootRepository;
+import com.example.thevault.handelingen.RootRepositoryFinancieel;
+import com.example.thevault.handelingen.RootRepositoryHandelingen;
 import com.example.thevault.financieel.RekeningService;
+import com.example.thevault.handelingen.RootRepositoryKlant;
 import com.example.thevault.klant.authorization.AuthorizationService;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
@@ -17,9 +19,11 @@ import java.util.UUID;
 @Service
 public class LoginService {
 
-    private RootRepository rootRepository;
+    private RootRepositoryHandelingen rootRepositoryHandelingen;
     private AuthorizationService authorizationService;
     private RekeningService rekeningService;
+    private final RootRepositoryKlant rootRepositoryKlant;
+    private final RootRepositoryFinancieel rootRepositoryFinancieel;
 
     //TODO Verwijderen? Worden nergens gebruikt
     private UUID opaakToken;
@@ -29,11 +33,14 @@ public class LoginService {
 
     //TODO JavaDoc
     @Autowired
-    public LoginService(RootRepository rootRepository, AuthorizationService authorizationService, RekeningService rekeningService) {
+    public LoginService(RootRepositoryHandelingen rootRepositoryHandelingen, AuthorizationService authorizationService, RekeningService rekeningService
+            , RootRepositoryKlant rootRepositoryKlant, RootRepositoryFinancieel rootRepositoryFinancieel) {
         super();
-        this.rootRepository = rootRepository;
+        this.rootRepositoryHandelingen = rootRepositoryHandelingen;
         this.authorizationService = authorizationService;
         this.rekeningService = rekeningService;
+        this.rootRepositoryKlant = rootRepositoryKlant;
+        this.rootRepositoryFinancieel = rootRepositoryFinancieel;
         logger.info("New LoginService......");
     }
 
@@ -64,6 +71,6 @@ public class LoginService {
      * @return klant-object op basis van gegevens uit de database of null indien gebruikersnaam niet gevonden is
      */
     public Klant vindKlantByGebruikersnaam(String gebruikersnaam){
-        return rootRepository.vindKlantByGebruikersnaam(gebruikersnaam);
+        return rootRepositoryKlant.vindKlantByGebruikersnaam(gebruikersnaam);
     }
 }

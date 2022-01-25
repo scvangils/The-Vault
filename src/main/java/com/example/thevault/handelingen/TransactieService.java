@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Service
 public class TransactieService {
 
-    private final RootRepository rootRepository;
+    private final RootRepositoryHandelingen rootRepositoryHandelingen;
     private final KlantService klantService;
     private final RekeningService rekeningService;
     private final AssetService assetService;
@@ -34,10 +34,10 @@ public class TransactieService {
 
     //TODO JavaDoc
     @Autowired
-    public TransactieService(RootRepository rootRepository, KlantService klantService, RekeningService rekeningService,
+    public TransactieService(RootRepositoryHandelingen rootRepositoryHandelingen, KlantService klantService, RekeningService rekeningService,
                              AssetService assetService) {
         super();
-        this.rootRepository = rootRepository;
+        this.rootRepositoryHandelingen = rootRepositoryHandelingen;
         this.klantService = klantService;
         this.rekeningService = rekeningService;
 
@@ -197,7 +197,7 @@ public class TransactieService {
      * @return de prijs
     * */
     public double berekenPrijsTransactieMetBank(Cryptomunt cryptomunt, LocalDateTime datumEnTijd){
-        return rootRepository.haalCryptoWaardeOpDatum(cryptomunt, datumEnTijd.toLocalDate()).getWaarde();
+        return rootRepositoryHandelingen.haalCryptoWaardeOpDatum(cryptomunt, datumEnTijd.toLocalDate()).getWaarde();
     }
 
     /**
@@ -207,7 +207,7 @@ public class TransactieService {
      * @retrun transactie die zojuist is opgeslagen
     * */
     public Transactie slaTransactieOp(Transactie transactie){
-        return rootRepository.slaTransactieOp(transactie);
+        return rootRepositoryHandelingen.slaTransactieOp(transactie);
     }
 
     /**
@@ -236,7 +236,7 @@ public class TransactieService {
      * @throws BalanceTooLowException exception die een NOT_ACCEPTABLE hhtp status teruggeeft
     * */
     public void saldoTooLowExceptionHandler(Gebruiker koper, double bedrag) throws BalanceTooLowException  {
-        double saldoGebruiker = rootRepository.vindRekeningVanGebruiker(koper).getSaldo();
+        double saldoGebruiker = rootRepositoryHandelingen.rootRepositoryFinancieel.vindRekeningVanGebruiker(koper).getSaldo();
         System.out.println("**** Het saldo van de koper is: " + saldoGebruiker);
         System.out.println("**** Het bedrag is: " + bedrag);
         if((saldoGebruiker - bedrag) < 0 ) {
@@ -247,7 +247,7 @@ public class TransactieService {
 
     //TODO JavaDoc
     public Trigger maakBankTrigger(Trigger klantTrigger){
-        double prijs = rootRepository.haalMeestRecenteCryptoWaarde(klantTrigger.getCryptomunt()).getWaarde();
+        double prijs = rootRepositoryHandelingen.haalMeestRecenteCryptoWaarde(klantTrigger.getCryptomunt()).getWaarde();
         double aantal = klantTrigger.getAantal();
         Cryptomunt cryptomunt = klantTrigger.getCryptomunt();
         if(TriggerService.isKoper(klantTrigger)){
@@ -263,7 +263,7 @@ public class TransactieService {
  * @return TransactiePaginaDto benodigde gegevens voor het transactiescherm
  */
     public TransactiePaginaDto openTransactiescherm(TransactieStartDto transactieStartDto){
-        return rootRepository.openTransactieScherm(transactieStartDto);
+        return rootRepositoryHandelingen.openTransactieScherm(transactieStartDto);
     }
 }
 

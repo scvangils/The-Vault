@@ -20,17 +20,17 @@ public class CryptoHistorischService{
 
     private final Logger logger = LoggerFactory.getLogger(CryptoHistorischService.class);
 
-    private final RootRepository rootRepository;
+    private final RootRepositoryHandelingen rootRepositoryHandelingen;
 
     /**
      * constructor voor CryptoHistorischService voor Spring Boot
      * met dependency injection
      *
-     * @param rootRepository  De class die als facade voor de database dient
+     * @param rootRepositoryHandelingen  De class die als facade voor de database dient
      */
-    public CryptoHistorischService(RootRepository rootRepository) {
+    public CryptoHistorischService(RootRepositoryHandelingen rootRepositoryHandelingen) {
         super();
-        this.rootRepository = rootRepository;
+        this.rootRepositoryHandelingen = rootRepositoryHandelingen;
         logger.info("New CryptoHistorischService");
     }
 
@@ -42,7 +42,7 @@ public class CryptoHistorischService{
      * @return een Dto die een array van waarden en een array van datum-strings bevat
      */
     public CryptoWaardenHistorischDto maakCryptoWaardeArray(Cryptomunt cryptomunt){
-        List<CryptoWaarde> cryptoWaardeList = rootRepository.haalAlleCryptoWaardesVanCryptomunt(cryptomunt);
+        List<CryptoWaarde> cryptoWaardeList = rootRepositoryHandelingen.haalAlleCryptoWaardesVanCryptomunt(cryptomunt);
         String[] datum = new String[cryptoWaardeList.size()];
         double[] waarde = new double[cryptoWaardeList.size()];
         for (int i = 0; i < cryptoWaardeList.size(); i++) {
@@ -59,7 +59,7 @@ public class CryptoHistorischService{
      * @return een array van alle gebruikte cryptomunten
      */
     public Cryptomunt[] maakCryptoMuntArray(){
-        return rootRepository.geefAlleCryptomunten().toArray(Cryptomunt[]::new);
+        return rootRepositoryHandelingen.rootRepositoryFinancieel.geefAlleCryptomunten().toArray(Cryptomunt[]::new);
     }
 
     /**
@@ -70,7 +70,7 @@ public class CryptoHistorischService{
      * @return het corresponderende cryptomunt object of null indien niet aanwezig in de database
      */
     public Cryptomunt getCryptoMuntOpNaam(String naam){
-       return rootRepository.geefAlleCryptomunten().stream()
+       return rootRepositoryHandelingen.rootRepositoryFinancieel.geefAlleCryptomunten().stream()
                .filter(cryptomunt -> cryptomunt.getName().equals(naam)).findFirst().orElse(null);
     }
 

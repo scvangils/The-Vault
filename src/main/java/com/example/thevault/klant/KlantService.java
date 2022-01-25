@@ -5,10 +5,12 @@ package com.example.thevault.klant;
 
 
 import com.example.thevault.financieel.Cryptomunt;
-import com.example.thevault.handelingen.RootRepository;
+import com.example.thevault.handelingen.RootRepositoryHandelingen;
 
 import com.example.thevault.financieel.CryptoDto;
 import com.example.thevault.financieel.Asset;
+import com.example.thevault.handelingen.RootRepositoryKlant;
+import com.example.thevault.handelingen.RootRepositoryFinancieel;
 import com.example.thevault.support.BSNvalidator;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
@@ -30,7 +32,10 @@ import java.util.List;
 @Service
 public class KlantService{
 
-    private final RootRepository rootRepository;
+    private final RootRepositoryHandelingen rootRepositoryHandelingen;
+    private final RootRepositoryKlant rootRepositoryKlant;
+    private final RootRepositoryFinancieel rootRepositoryFinancieel;
+
     private final Logger logger = LoggerFactory.getLogger(KlantService.class);
     public final static int VOLWASSEN_LEEFTIJD = 18;
     public final static int MINIMALE_WACHTWOORDLENGTE = 8;
@@ -39,12 +44,15 @@ public class KlantService{
      * De constructor van de KlantService class voor Spring Boot
      * met dependency injection
      *
-     * @param rootRepository De class die als facade voor de database dient
+     * @param rootRepositoryHandelingen De class die als facade voor de database dient
      */
     @Autowired
-    public KlantService(RootRepository rootRepository) {
+    public KlantService(RootRepositoryHandelingen rootRepositoryHandelingen,
+                        RootRepositoryKlant rootRepositoryKlant, RootRepositoryFinancieel rootRepositoryFinancieel) {
         super();
-        this.rootRepository = rootRepository;
+        this.rootRepositoryHandelingen = rootRepositoryHandelingen;
+        this.rootRepositoryKlant = rootRepositoryKlant;
+        this.rootRepositoryFinancieel = rootRepositoryFinancieel;
         logger.info("New KlantService.");
     }
 
@@ -56,7 +64,7 @@ public class KlantService{
      * @return klant-object op basis van gegevens uit de database of null indien gebruikersnaam niet gevonden is
      */
     public Klant vindKlantByGebruikersnaam(String gebruikersnaam){
-        return rootRepository.vindKlantByGebruikersnaam(gebruikersnaam);
+        return rootRepositoryKlant.vindKlantByGebruikersnaam(gebruikersnaam);
         //TODO de methode 'geefNuttigePortefeuille' aanroepen om de asset objecten voor de klant op te schonen (zie onder)
     }
 
@@ -68,7 +76,7 @@ public class KlantService{
      * @return klant-object op basis van gegevens uit de database of null indien gebruikerId niet gevonden is
      */
     public Klant vindKlantById(int gebruikerId){
-        return rootRepository.vindKlantById(gebruikerId);
+        return rootRepositoryKlant.vindKlantById(gebruikerId);
     }
 
     /**
@@ -82,11 +90,11 @@ public class KlantService{
 
     public List<CryptoDto> geefNuttigePortefeuille(Klant klant){
         List<CryptoDto> portefeuilleVoorKlant = new ArrayList<>();
-        for (Cryptomunt cryptomunt : rootRepository.geefAlleCryptomunten()) {
+        for (Cryptomunt cryptomunt : rootRepositoryFinancieel.geefAlleCryptomunten()) {
             String naam = cryptomunt.getName();
             String afkorting = cryptomunt.getName();
-            double prijs = rootRepository.haalMeestRecenteCryptoWaarde(cryptomunt).getWaarde();
-            double aantal = rootRepository.geefAssetVanGebruikerOrElseNull(klant, cryptomunt);
+            double prijs = rootRepositoryHandelingen.haalMeestRecenteCryptoWaarde(cryptomunt).getWaarde();
+            double aantal = rootRepositoryHandelingen.geefAssetVanGebruikerOrElseNull(klant, cryptomunt);
             portefeuilleVoorKlant.add(new CryptoDto(naam, afkorting, prijs,aantal));
         }
         return portefeuilleVoorKlant;
@@ -102,7 +110,7 @@ public class KlantService{
      * @return asset met cryptomunt + aantal van gebruiker of null
      */
     public Asset geefAssetMetCryptoMuntVanGebruiker(Gebruiker gebruiker, Cryptomunt cryptomunt){
-        List<Asset> portefeuille = rootRepository.vulPortefeuilleKlant(gebruiker);
+        List<Asset> portefeuille = rootRepositoryKlant.vulPortefeuilleKlant(gebruiker);
         if(portefeuille != null){
             for (Asset asset: portefeuille) {
                 if(asset.getCryptomunt().equals(cryptomunt)){
@@ -131,7 +139,7 @@ public class KlantService{
         String gehashtWachtwoord = BCryptWachtwoordHash.hashWachtwoord(teHashenWachtwoord); // hash wachtwoord
         gehashtWachtwoord = Base64.encodeBase64String(gehashtWachtwoord.getBytes(StandardCharsets.UTF_8)); // versleutel gehasht wachtwoord
         klant.setWachtwoord(gehashtWachtwoord);
-        rootRepository.slaKlantOp(klant);
+        rootRepositoryKlant.slaKlantOp(klant);
         return klant;
     }
 

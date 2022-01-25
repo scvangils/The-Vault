@@ -6,15 +6,11 @@ package com.example.thevault.handelingen;
 import com.example.thevault.financieel.Cryptomunt;
 import com.example.thevault.financieel.CryptomuntDAO;
 import com.example.thevault.klant.Gebruiker;
-import com.example.thevault.financieel.Asset;
-import com.example.thevault.klant.Adres;
-import com.example.thevault.klant.AdresDAO;
 import com.example.thevault.klant.Klant;
 import com.example.thevault.klant.KlantDAO;
 import com.example.thevault.financieel.AssetDAO;
 import com.example.thevault.financieel.Rekening;
 import com.example.thevault.financieel.RekeningDAO;
-import com.example.thevault.financieel.AssetNotExistsException;
 import net.minidev.json.annotate.JsonIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,215 +29,49 @@ import java.util.List;
  */
 
 @Repository
-public class RootRepository implements ApplicationListener<ContextRefreshedEvent> {
+public class RootRepositoryHandelingen implements ApplicationListener<ContextRefreshedEvent> {
 
     @JsonIgnore
-    private final Logger logger = LoggerFactory.getLogger(RootRepository.class);
+    private final Logger logger = LoggerFactory.getLogger(RootRepositoryHandelingen.class);
+    public final RootRepositoryFinancieel rootRepositoryFinancieel;
 
     private final KlantDAO klantDAO;
     private final RekeningDAO rekeningDAO;
     private final AssetDAO assetDAO;
     private final CryptomuntDAO cryptomuntDAO;
     private final CryptoWaardeDAO cryptoWaardeDAO;
-    private final AdresDAO adresDAO;
     private final TransactieDAO transactieDAO;
     private final TriggerDAO triggerDAO;
     private final String KOPER = "Koper";
     private final String VERKOPER = "Verkoper";
 
     /**
-     * Constructor voor RootRepository
-     * In de constructor worden alle DAOs geinjecteerd die de RootRepository nodig heeft
+     * Constructor voor RootRepositoryHandelingen
+     * In de constructor worden alle DAOs geinjecteerd die de RootRepositoryHandelingen nodig heeft
      * @param klantDAO
      * @param rekeningDAO
      * @param assetDAO
      * @param cryptomuntDAO
      * @param cryptoWaardeDAO
-     * @param adresDAO
      * @param transactieDAO
      * @param triggerDAO
      */
     @Autowired
-    public RootRepository(KlantDAO klantDAO, RekeningDAO rekeningDAO, AssetDAO assetDAO, CryptomuntDAO cryptomuntDAO,
-                          CryptoWaardeDAO cryptoWaardeDAO, AdresDAO adresDAO,
-                          TransactieDAO transactieDAO, TriggerDAO triggerDAO) {
+    public RootRepositoryHandelingen(KlantDAO klantDAO, RekeningDAO rekeningDAO, AssetDAO assetDAO, CryptomuntDAO cryptomuntDAO,
+                                     CryptoWaardeDAO cryptoWaardeDAO,
+                                     TransactieDAO transactieDAO, TriggerDAO triggerDAO, RootRepositoryFinancieel rootRepositoryFinancieel) {
         super();
         this.rekeningDAO = rekeningDAO;
         this.klantDAO = klantDAO;
         this.assetDAO = assetDAO;
         this.cryptomuntDAO = cryptomuntDAO;
         this.cryptoWaardeDAO = cryptoWaardeDAO;
-        this.adresDAO = adresDAO;
         this.transactieDAO = transactieDAO;
         this.triggerDAO = triggerDAO;
-        logger.info("New RootRepository");
+        this.rootRepositoryFinancieel = rootRepositoryFinancieel;
+        logger.info("New RootRepositoryHandelingen");
     }
 
-    /**
-     * author: Steven van Gils
-     * Deze methode slaat de gegevens van een klant op in de database
-     * op basis van een klant-object, de gebruikerId gaat van 0 naar de juiste
-     *
-     * @param klant het klant-object op basis van bij registratie ingevoerde gegevens
-     * @return het klant-object met de juiste gebruikerId
-     */
-    public Klant slaKlantOp(Klant klant){
-        klant.setAdres(adresDAO.slaAdresOp(klant.getAdres()));
-        return klantDAO.slaKlantOp(klant);
-    }
-
-    /**
-     * author: Steven van Gils
-     * Deze methode zorgt ervoor dat een nieuw adres van een klant kan worden opgeslagen
-     *
-     * @param klant De betreffende klant
-     * @param adres Het nieuwe adres
-     * @return
-     */
-    public Adres slaNieuwAdresVanBestaandeKlantOp(Klant klant, Adres adres){
-        adresDAO.slaAdresOp(adres);
-        klant.setAdres(adres);
-        klantDAO.updateKlant(klant);
-        return adres;
-    }
-
-    /**
-     * author: Steven van Gils
-     * Deze methode zoekt of er in de database al een klant bestaat met deze gebruikersnaam
-     * en maakt eventueel een klant-object aan op nasis van de teruggestuurde gegevens
-     * Hier in de repository worden portefeuille en rekening toegevoegd
-     *
-     * @param gebruikersnaam gebruikersnaam van een (mogelijke) klant die uniek moet zijn
-     * @return klant-object op basis van gegevens uit de database of null indien gebruikersnaam niet gevonden is
-     */
-    public Klant vindKlantByGebruikersnaam(String gebruikersnaam){
-        Klant klant = klantDAO.vindKlantByGebruikersnaam(gebruikersnaam);
-        maakKlantCompleet(klant);
-        return klant;
-    }
-    private void maakKlantCompleet(Klant klant) {
-        if(klant != null){
-            klant.setRekening(vindRekeningVanGebruiker(klant));
-            klant.setAdres(adresDAO.getAdresByKlant(klant));
-            klant.setPortefeuille(vulPortefeuilleKlant(klant));
-            klant.setTransacties(geefTransactiesVanGebruiker(klant));
-            klant.setTriggerKoperList(vindTriggersByGebruiker(klant, KOPER));
-            klant.setTriggerVerkoperList(vindTriggersByGebruiker(klant, VERKOPER));
-
-        }
-    }
-
-    /**
-     * author: Steven van Gils
-     * Deze methode zoekt of er in de database al een klant bestaat met deze gebruikerId
-     * en maakt eventueel een klant-object aan op basis van de teruggestuurde gegevens
-     * Hier in de repository worden portefeuille en rekening toegevoegd
-     *
-     * @param gebruikerId gebruikerId van een (mogelijke) klant die uniek moet zijn
-     * @return klant-object op basis van gegevens uit de database of null indien gebruikerId niet gevonden is
-     */
-    public Klant vindKlantById(int gebruikerId){
-        Klant klant = klantDAO.vindKlantById(gebruikerId);
-        maakKlantCompleet(klant);
-        return klant;
-    }
-
-    /**
-     * Author: Ju-Sen Cheung
-     * Deze methode slaat de gegevens van een rekening op in de database via de methode in de rekeningDAO.
-     * @param rekening is de rekening die is aangemaakt bij een nieuwe gebruiker.
-     * @return de rekening behorende bij de nieuwe gebruiker.
-     */
-    public Rekening slaRekeningOp(Rekening rekening){
-        return rekeningDAO.slaRekeningOp(rekening);
-    }
-
-
-    /**
-    * Author: Ju-Sen Cheung
-    * Methode die op gebruiker zoekt en de rekening teruggeeft
-    * @param gebruiker kan zowel een klant als een bank zijn
-    * @return rekening geeft een rekening object terug
-    * */
-    public Rekening vindRekeningVanGebruiker(Gebruiker gebruiker){
-        return rekeningDAO.vindRekeningVanGebruiker(gebruiker);
-    }
-
-    /**
-     * Author: Ju-Sen Cheung
-     * Deze methode geeft het rekeningsaldo op van de gebruiker. Het saldo wordt via de methode in de rekeningDAO uit
-     * de database gehaald.
-     * @param gebruiker is de gebruiker van wie het rekeningsaldo wordt opgevraagd.
-     * @return het rekeningsaldo behorende bij de gebruiker.
-     */
-    public double vraagSaldoOpVanGebruiker(Gebruiker gebruiker){
-        return rekeningDAO.vraagSaldoOpVanGebruiker(gebruiker);
-    }
-
-    /**
-     * Author: Ju-Sen Cheung
-     * Deze methode wijzigt het rekeningsaldo van de klant in de database via de methode in de rekeningDAO.
-     * @param gebruiker is de gebruiker van wie het rekeningsaldo wordt opgevraagd.
-     * @param transactiebedrag is het bedrag waarmee het saldo van de rekening verhoogd of verlaagd moet worden.
-     * @return rekening met geüpdatete saldo.
-     */
-    public Rekening wijzigSaldoVanGebruiker(Gebruiker gebruiker, double transactiebedrag){
-        return rekeningDAO.wijzigSaldoVanGebruiker(gebruiker, transactiebedrag);
-    }
-
-    /**
-     * Author: Carmen
-     * Dit betreft het vullen van de portefeuille met alle cryptomunten die er in zitten. Voor iedere asset
-     * wordt alle informatie over de bijbehorende cryptomunt opgevraagd en meegegeven
-     * @param gebruiker de klant die informatie opvraagt over de cryptomunt
-     * @return List</Asset> een lijst van alle Assets (cryptomunten + hoeveelheden) in het bezit van de klant
-     */
-    public List<Asset> vulPortefeuilleKlant(Gebruiker gebruiker){
-        List<Asset> portefeuille = assetDAO.geefAlleAssets(gebruiker);
-        if(portefeuille.size() != 0){
-        for (Asset asset: portefeuille) {
-            Cryptomunt cryptomunt = cryptomuntDAO.geefCryptomunt(asset.getCryptomunt().getId());
-            asset.setCryptomunt(cryptomunt);
-        }
-        gebruiker.setPortefeuille(portefeuille);
-        }
-        return portefeuille;
-    }
-
-    /**
-     * Author: Carmen
-     * Dit betreft het vinden van een specifieke cryptomunt die in de portefeuille zit
-     * @param gebruiker de gebruiker die informatie opvraagt over de cryptomunt
-     * @param cryptomunt cryptomunt waarover informatie wordt opgevraagd
-     * @return Asset de asset (cryptomunt + aantal) waarover informatie is opgevraagd
-     */
-    public Asset geefAssetVanGebruiker(Gebruiker gebruiker, Cryptomunt cryptomunt){
-        return assetDAO.geefAssetGebruiker(gebruiker, cryptomunt).orElseThrow(AssetNotExistsException::new);
-    }
-
-    /**
-     * Author: Carmen
-     * Dit betreft het toevoegen van een cryptomunt die nog niet in de portefeuille zit
-     * Dit gebeurt via een 'transactie', waarbij een klant crypto's koopt
-     * @param asset de cryptomunt en het aantal dat de klant aanschaft
-     * @return Asset de asset die de klant heeft toegevoegd
-     */
-    public Asset slaNieuwAssetVanKlantOp(Asset asset){
-        return assetDAO.voegNieuwAssetToeAanPortefeuille(asset);
-    }
-
-    /**
-     * Author: Carmen
-     * Dit betreft het wijzigen van een cryptomunt die al in de portefeuille zit
-     * Dit gebeurt via een 'transactie', waarbij een klant crypto's koopt of verkoopt
-     * @param gebruiker de handelende partij
-     * @param cryptomunt de munt waarin gehandeld wordt
-     * @param aantal de hoeveelheid die verhandeld wordt
-     * @return Asset de asset na de update, waarbij het nieuwe aantal wordt meegegeven
-     */
-    public Asset wijzigAssetVanKlant(Gebruiker gebruiker, Cryptomunt cryptomunt, double aantal){
-        return assetDAO.updateAsset(gebruiker, cryptomunt , aantal);
-    }
 
     /**
      * author: Steven van Gils
@@ -335,7 +165,7 @@ public class RootRepository implements ApplicationListener<ContextRefreshedEvent
             transactie.setVerkoper(klantDAO.vindKlantById(transactie.getVerkoper().getGebruikerId()));
             transactie.getVerkoper().setRekening(rekeningDAO.vindRekeningVanGebruiker(transactie.getVerkoper()));
         }
-        else transactie.getVerkoper().setRekening(vindRekeningVanGebruiker(transactie.getVerkoper()));
+        else transactie.getVerkoper().setRekening(rekeningDAO.vindRekeningVanGebruiker(transactie.getVerkoper()));
     }
 
     private void setKoperTransactie(Transactie transactie) {
@@ -343,7 +173,7 @@ public class RootRepository implements ApplicationListener<ContextRefreshedEvent
             transactie.setKoper(klantDAO.vindKlantById(transactie.getKoper().getGebruikerId()));
             transactie.getKoper().setRekening(rekeningDAO.vindRekeningVanGebruiker(transactie.getKoper()));
         }
-        else transactie.getKoper().setRekening(vindRekeningVanGebruiker(transactie.getKoper()));
+        else transactie.getKoper().setRekening(rekeningDAO.vindRekeningVanGebruiker(transactie.getKoper()));
     }
 
 
@@ -390,21 +220,7 @@ public class RootRepository implements ApplicationListener<ContextRefreshedEvent
     public double geefAssetVanGebruikerOrElseNull(Gebruiker gebruiker, Cryptomunt cryptomunt){
         return assetDAO.geefAantalCryptoInEigendom(gebruiker, cryptomunt);
     }
-    //TODO JavaDoc
-    public Cryptomunt geefCryptomuntByNaam(String cryptoNaam){
-        return cryptomuntDAO.geefCryptomuntByNaam(cryptoNaam);
-    }
 
-
-    //TODO JavaDoc
-    public Cryptomunt geefCryptomunt(int cryptomuntId){
-        return cryptomuntDAO.geefCryptomunt(cryptomuntId);
-    }
-
-    //TODO JavaDoc
-    public List<Cryptomunt> geefAlleCryptomunten(){
-        return cryptomuntDAO.geefAlleCryptomunten();
-    }
 
     /**
      * author: Steven van Gils
@@ -449,7 +265,7 @@ public class RootRepository implements ApplicationListener<ContextRefreshedEvent
     }
 
     private void maakTriggerCompleet(Trigger trigger) {
-        trigger.setCryptomunt(geefCryptomunt(trigger.getCryptomunt().getId()));
+        trigger.setCryptomunt(rootRepositoryFinancieel.geefCryptomunt(trigger.getCryptomunt().getId()));
         trigger.setGebruiker(klantDAO.vindKlantById(trigger.getGebruiker().getGebruikerId()));
     }
 
@@ -499,12 +315,12 @@ public class RootRepository implements ApplicationListener<ContextRefreshedEvent
      */
     public TransactiePaginaDto openTransactieScherm(TransactieStartDto transactieStartDto){
         TransactiePaginaDto transactiePaginaDto = new TransactiePaginaDto();
-        Klant klant = vindKlantByGebruikersnaam(transactieStartDto.getGebruikersNaam());
+        Klant klant = klantDAO.vindKlantByGebruikersnaam(transactieStartDto.getGebruikersNaam());
         Rekening rekening = klant.getRekening();
         Cryptomunt cryptomunt = cryptomuntDAO.geefCryptomuntByNaam(transactieStartDto.getCryptoNaam());
         CryptoWaarde cryptoWaarde = haalMeestRecenteCryptoWaarde(cryptomunt);
         transactiePaginaDto.setKlantnaam(klant.getNaam());
-        transactiePaginaDto.setRekeningsaldo(vraagSaldoOpVanGebruiker(klant));
+        transactiePaginaDto.setRekeningsaldo(rootRepositoryFinancieel.vraagSaldoOpVanGebruiker(klant));
         transactiePaginaDto.setIban(rekening.getIban());
         transactiePaginaDto.setCryptoNaam(cryptomunt.getName());
         transactiePaginaDto.setCryptoDagkoers(cryptoWaarde.getWaarde());

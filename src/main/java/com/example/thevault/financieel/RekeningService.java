@@ -1,6 +1,8 @@
 package com.example.thevault.financieel;
 
-import com.example.thevault.handelingen.RootRepository;
+import com.example.thevault.handelingen.RootRepositoryHandelingen;
+import com.example.thevault.handelingen.RootRepositoryKlant;
+import com.example.thevault.handelingen.RootRepositoryFinancieel;
 import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.klant.Klant;
 import net.minidev.json.annotate.JsonIgnore;
@@ -20,7 +22,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class RekeningService {
 
-    private RootRepository rootRepository;
+    private RootRepositoryHandelingen rootRepositoryHandelingen;
+    private final RootRepositoryKlant rootRepositoryKlant;
+    private final RootRepositoryFinancieel rootRepositoryFinancieel;
 
     @JsonIgnore
     private final Logger logger = LoggerFactory.getLogger(RekeningService.class);
@@ -30,12 +34,14 @@ public class RekeningService {
      /**
      * Hier is sprake van Dependency Injection. Dee rekeningService wordt hier aangemaakt en deze maakt gebruik van de
      * rootrepository. Deze wordt als het ware geïnjecteerd.
-     * @param rootRepository de repository waar de methodes kunnen worden aangeroepen die in deze klasse worden gebruikt.
+     * @param rootRepositoryHandelingen de repository waar de methodes kunnen worden aangeroepen die in deze klasse worden gebruikt.
      */
     @Autowired
-    public RekeningService(RootRepository rootRepository) {
+    public RekeningService(RootRepositoryHandelingen rootRepositoryHandelingen, RootRepositoryKlant rootRepositoryKlant, RootRepositoryFinancieel rootRepositoryFinancieel) {
         super();
-        this.rootRepository = rootRepository;
+        this.rootRepositoryHandelingen = rootRepositoryHandelingen;
+        this.rootRepositoryKlant = rootRepositoryKlant;
+        this.rootRepositoryFinancieel = rootRepositoryFinancieel;
         logger.info("Nieuwe RekeningService.");
     }
 
@@ -65,11 +71,11 @@ public class RekeningService {
     /**
      * Deze methode zorgt ervoor dat een aangemaakte rekening wordt opgeslagen.
      * @param rekening is de meegegeven rekening welke opgeslagen moet worden.
-     * @return de aangemaakte rekening wordt doorgegeven aan de RootRepository voor het verdere opslagproces via de DAO
+     * @return de aangemaakte rekening wordt doorgegeven aan de RootRepositoryHandelingen voor het verdere opslagproces via de DAO
      * in de database.
      */
     public Rekening slaRekeningOp(Rekening rekening){
-        return rootRepository.slaRekeningOp(rekening);
+        return rootRepositoryKlant.slaRekeningOp(rekening);
     }
 
      /**
@@ -80,13 +86,13 @@ public class RekeningService {
      * @return de opgevraagde rekening wordt teruggegeven.
      */
     public Rekening vindRekening(Gebruiker gebruiker) throws UserNotExistsException {
-        if (gebruiker == null){
+/*        if (gebruiker == null){
             throw new UserNotExistsException();
         }
         if (rootRepository.vindKlantByGebruikersnaam(gebruiker.getGebruikersnaam()) == null ){
             throw new UserNotExistsException();
-        }
-        return rootRepository.vindRekeningVanGebruiker(gebruiker);
+        }*/
+        return rootRepositoryFinancieel.vindRekeningVanGebruiker(gebruiker);
     }
 
     /**
@@ -97,12 +103,12 @@ public class RekeningService {
      * @return het saldo van de opgevraagde rekening wordt teruggegeven.
      */
     public double vraagSaldoOp(Gebruiker gebruiker) throws UserNotExistsException{
-        if (gebruiker == null){
+/*        if (gebruiker == null){
             throw new UserNotExistsException();
         }
         if (rootRepository.vindKlantByGebruikersnaam(gebruiker.getGebruikersnaam()) == null ){
             throw new UserNotExistsException();
-        }
+        }*/
         return vindRekening(gebruiker).getSaldo();
     }
 
@@ -116,6 +122,6 @@ public class RekeningService {
      */
 
     public Rekening wijzigSaldo(Gebruiker gebruiker, double transactiebedrag) {
-        return rootRepository.wijzigSaldoVanGebruiker(gebruiker, transactiebedrag);
+        return rootRepositoryFinancieel.wijzigSaldoVanGebruiker(gebruiker, transactiebedrag);
     }
 }

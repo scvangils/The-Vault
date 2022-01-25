@@ -13,7 +13,7 @@ import java.util.*;
 
 @Service
 public class CryptoWaardeService {
-    private RootRepository rootRepository;
+    private RootRepositoryHandelingen rootRepositoryHandelingen;
 
     @JsonIgnore
     private final Logger logger = LoggerFactory.getLogger(CryptoWaardeService.class);
@@ -23,9 +23,9 @@ public class CryptoWaardeService {
     private static final String CRON_NEDERLANDSE_TIJDZONE = "Europe/Paris";
 
     //TODO JavaDoc
-    public CryptoWaardeService(RootRepository rootRepository){
+    public CryptoWaardeService(RootRepositoryHandelingen rootRepositoryHandelingen){
         super();
-        this.rootRepository = rootRepository;
+        this.rootRepositoryHandelingen = rootRepositoryHandelingen;
     }
 
     /**
@@ -34,7 +34,7 @@ public class CryptoWaardeService {
      * @param cryptoWaarde De betreffende cryptowaarde
      */
     public void slaCryptoWaardeOp(CryptoWaarde cryptoWaarde){
-        rootRepository.slaCryptoWaardeOp(cryptoWaarde);
+        rootRepositoryHandelingen.slaCryptoWaardeOp(cryptoWaarde);
     }
 
     /**
@@ -45,7 +45,7 @@ public class CryptoWaardeService {
      * @return CryptoWaarde-object om huidige waarde van asset te kunnen berekenen
      */
     public CryptoWaarde vindMeestRecenteCryptoWaarde(Cryptomunt cryptomunt){
-        return rootRepository.haalMeestRecenteCryptoWaarde(cryptomunt);
+        return rootRepositoryHandelingen.haalMeestRecenteCryptoWaarde(cryptomunt);
     }
 
     /**
@@ -56,7 +56,7 @@ public class CryptoWaardeService {
      * @return Een cryptoWaarde-object met de gezochte informatie of null indien niet aanwezig voor die datum
      */
     public CryptoWaarde vindCryptoWaardeOpDatum(Cryptomunt cryptomunt, LocalDate datum){
-        return rootRepository.haalCryptoWaardeOpDatum(cryptomunt, datum);
+        return rootRepositoryHandelingen.haalCryptoWaardeOpDatum(cryptomunt, datum);
     }
 
     /**

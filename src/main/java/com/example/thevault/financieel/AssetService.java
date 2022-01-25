@@ -3,8 +3,10 @@
 
 package com.example.thevault.financieel;
 
+import com.example.thevault.handelingen.RootRepositoryHandelingen;
+import com.example.thevault.handelingen.RootRepositoryKlant;
+import com.example.thevault.handelingen.RootRepositoryFinancieel;
 import com.example.thevault.klant.Gebruiker;
-import com.example.thevault.handelingen.RootRepository;
 import com.example.thevault.handelingen.CryptoWaarde;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.slf4j.Logger;
@@ -23,19 +25,23 @@ import java.util.List;
 @Service
 public class AssetService {
 
-    private RootRepository rootRepository;
+    private RootRepositoryHandelingen rootRepositoryHandelingen;
+    private final RootRepositoryKlant rootRepositoryKlant;
+    private final RootRepositoryFinancieel rootRepositoryFinancieel;
 
     @JsonIgnore
     private final Logger logger = LoggerFactory.getLogger(AssetService.class);
 
     /**
      * Hier wordt de assetService aangemaakt, met de rootrepository geïnjecteerd
-     * @param rootRepository de repository waar de methodes kunnen worden aangeroepen die in deze class worden gebruikt
+     * @param rootRepositoryHandelingen de repository waar de methodes kunnen worden aangeroepen die in deze class worden gebruikt
      */
     @Autowired
-    public AssetService(RootRepository rootRepository) {
+    public AssetService(RootRepositoryHandelingen rootRepositoryHandelingen, RootRepositoryKlant rootRepositoryKlant, RootRepositoryFinancieel rootRepositoryFinancieel) {
         super();
-        this.rootRepository = rootRepository;
+        this.rootRepositoryHandelingen = rootRepositoryHandelingen;
+        this.rootRepositoryKlant = rootRepositoryKlant;
+        this.rootRepositoryFinancieel = rootRepositoryFinancieel;
         logger.info("New AssetService");
     }
 
@@ -47,7 +53,7 @@ public class AssetService {
      * @return AssetDto de asset waarover informatie is opgevraagd, in de vorm die voor de klant meerwaarde heeft
      */
     public AssetDto geefCryptomunt(Gebruiker gebruiker, Cryptomunt cryptomunt, CryptoWaarde cryptowaarde){
-        return new AssetDto(rootRepository.geefAssetVanGebruiker(gebruiker, cryptomunt), cryptowaarde);
+        return new AssetDto(rootRepositoryKlant.geefAssetVanGebruiker(gebruiker, cryptomunt), cryptowaarde);
     }
 
     /**
@@ -56,7 +62,7 @@ public class AssetService {
      * @return Asset de asset die is opgeslagen
      */
     public Asset slaNieuwAssetOp(Asset asset){
-        return rootRepository.slaNieuwAssetVanKlantOp(asset);
+        return rootRepositoryFinancieel.slaNieuwAssetVanKlantOp(asset);
     }
 
     /**
@@ -69,7 +75,7 @@ public class AssetService {
     public Asset wijzigAssetGebruiker(Gebruiker gebruiker, Cryptomunt cryptomunt, double aantal){
         List<Asset> portefeuille = vulPortefeuilleVanGebruiker(gebruiker);
         if(portefeuille != null) {
-        return rootRepository.wijzigAssetVanKlant(gebruiker, cryptomunt, aantal);
+        return rootRepositoryFinancieel.wijzigAssetVanKlant(gebruiker, cryptomunt, aantal);
         }
         return null;
     }
@@ -80,7 +86,7 @@ public class AssetService {
      * @return List<Asset> alle Assets van de klant
      */
     public List<Asset> vulPortefeuilleVanGebruiker(Gebruiker gebruiker){
-        return rootRepository.vulPortefeuilleKlant(gebruiker);
+        return rootRepositoryKlant.vulPortefeuilleKlant(gebruiker);
     }
 
     /**
@@ -88,6 +94,6 @@ public class AssetService {
      * @return List<Cryptomunt> alle cryptomunten in de database
      */
     public List<Cryptomunt> geefAlleCryptomunten(){
-        return rootRepository.geefAlleCryptomunten();
+        return rootRepositoryFinancieel.geefAlleCryptomunten();
     }
 }

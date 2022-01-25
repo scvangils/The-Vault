@@ -26,7 +26,9 @@ import java.util.List;
 @Service
 public class TriggerService implements ApplicationListener<ContextRefreshedEvent> {
 
-    private final RootRepository rootRepository;
+    private final RootRepositoryHandelingen rootRepositoryHandelingen;
+    private final RootRepositoryKlant rootRepositoryKlant;
+    private final RootRepositoryFinancieel rootRepositoryFinancieel;
     private final TransactieService transactieService;
     public final double DEEL_TRANSACTION_FEE_KOPER = 0.5;
     public final String KOPER = "Koper";
@@ -37,13 +39,16 @@ public class TriggerService implements ApplicationListener<ContextRefreshedEvent
     /**
      * Constructor voor TriggerService met dependency injection
      *
-     * @param rootRepository De class die de DAO's bundelt
+     * @param rootRepositoryHandelingen De class die de DAO's bundelt
      * @param transactieService De class die Transacties afhandelt
      */
-    public TriggerService(RootRepository rootRepository, TransactieService transactieService) {
+    public TriggerService(RootRepositoryHandelingen rootRepositoryHandelingen, TransactieService transactieService
+            , RootRepositoryKlant rootRepositoryKlant, RootRepositoryFinancieel rootRepositoryFinancieel) {
         super();
-        this.rootRepository = rootRepository;
+        this.rootRepositoryHandelingen = rootRepositoryHandelingen;
         this.transactieService = transactieService;
+        this.rootRepositoryKlant = rootRepositoryKlant;
+        this.rootRepositoryFinancieel = rootRepositoryFinancieel;
         logger.info("New TriggerService");
     }
 
@@ -152,7 +157,7 @@ public class TriggerService implements ApplicationListener<ContextRefreshedEvent
 
 
     private void verkoperSaldoEdgeCaseHandler(Trigger trigger){
-        double edgeCaseSaldo = rootRepository.vraagSaldoOpVanGebruiker(trigger.getGebruiker());
+        double edgeCaseSaldo = rootRepositoryFinancieel.vraagSaldoOpVanGebruiker(trigger.getGebruiker());
         edgeCaseSaldo += trigger.getAantal() * trigger.getTriggerPrijs();
         edgeCaseSaldo -= (1 - DEEL_TRANSACTION_FEE_KOPER) * Bank.getInstance().getFee();
         if(edgeCaseSaldo < 0){
@@ -187,7 +192,7 @@ public class TriggerService implements ApplicationListener<ContextRefreshedEvent
      * @return Het saldo dat hij zou hebben als al zijn triggers worden uitgevoerd
      */
     public double schaduwSaldo(Gebruiker gebruiker){
-        double schaduwSaldo = rootRepository.vraagSaldoOpVanGebruiker(gebruiker);
+        double schaduwSaldo = rootRepositoryFinancieel.vraagSaldoOpVanGebruiker(gebruiker);
         List<Trigger> triggerListKoper = vindTriggersByGebruiker(gebruiker, KOPER);
         for(Trigger trigger: triggerListKoper){
             schaduwSaldo -= trigger.getTriggerPrijs() * trigger.getAantal() + DEEL_TRANSACTION_FEE_KOPER * Bank.getInstance().getFee();
@@ -209,7 +214,7 @@ public class TriggerService implements ApplicationListener<ContextRefreshedEvent
      * @return Het aantal van de cryptomunt dat hij zou hebben als al zijn triggers worden uitgevoerd
      */
     public double schaduwAantalAsset(Gebruiker gebruiker, Cryptomunt cryptomunt){
-        Asset gebruikerAsset = rootRepository.geefAssetVanGebruiker(gebruiker, cryptomunt);
+        Asset gebruikerAsset = rootRepositoryKlant.geefAssetVanGebruiker(gebruiker, cryptomunt);
         checkTriggerAssetInPortefeuille(cryptomunt, gebruikerAsset);
         double schaduwAantal = gebruikerAsset.getAantal();
         List<Trigger> triggerListVerkoper = vindTriggersByGebruikerByCryptomunt(gebruiker, cryptomunt);
@@ -244,7 +249,7 @@ public class TriggerService implements ApplicationListener<ContextRefreshedEvent
      */
     public Trigger slaTriggerOp(Trigger trigger){
 
-       return rootRepository.slaTriggerOp(trigger);
+       return rootRepositoryHandelingen.slaTriggerOp(trigger);
     }
     /** Deze methode zoekt voor een triggerKoper in de triggerVerkoperTabel een match
      * om een transactie mee aan te gaan.
@@ -255,7 +260,7 @@ public class TriggerService implements ApplicationListener<ContextRefreshedEvent
      * @return De meest geschikte match of null indien geen match
      */
     public Trigger vindMatch(Trigger trigger){
-        return rootRepository.vindMatch(trigger);
+        return rootRepositoryHandelingen.vindMatch(trigger);
     }
 
     /**
@@ -265,7 +270,7 @@ public class TriggerService implements ApplicationListener<ContextRefreshedEvent
      * @return Een 0 indien gefaald of niet gevonden, een 1 indien geslaagd
      */
     public int verwijderTrigger(Trigger trigger){
-        return rootRepository.verwijderTrigger(trigger);
+        return rootRepositoryHandelingen.verwijderTrigger(trigger);
     }
 
     /**
@@ -275,7 +280,7 @@ public class TriggerService implements ApplicationListener<ContextRefreshedEvent
      * @return een List van Triggers, geheel bestaand uit een enkele subklasse
      */
     public List<Trigger> vindAlleTriggers(String koperOfVerkoper){
-        return rootRepository.vindAlleTriggers(koperOfVerkoper);
+        return rootRepositoryHandelingen.vindAlleTriggers(koperOfVerkoper);
     }
 
     /**
@@ -286,7 +291,7 @@ public class TriggerService implements ApplicationListener<ContextRefreshedEvent
      * @return een List van Triggers, geheel bestaand uit een enkele subklasse
      */
     public List<Trigger> vindTriggersByGebruiker(Gebruiker gebruiker, String koperOfVerkoper){
-        return rootRepository.vindTriggersByGebruiker(gebruiker, koperOfVerkoper);
+        return rootRepositoryHandelingen.vindTriggersByGebruiker(gebruiker, koperOfVerkoper);
     }
 
     private List<Trigger> vindTriggersByGebruikerByCryptomunt(Gebruiker gebruiker, Cryptomunt cryptomunt){
