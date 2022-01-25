@@ -1,9 +1,9 @@
 // Created by carme
 // Creation date 01/12/2021
 
-package com.example.thevault.handelingen;
+package com.example.thevault.financieel;
 
-import com.example.thevault.financieel.*;
+import com.example.thevault.klant.RootRepositoryKlant;
 import com.example.thevault.klant.Gebruiker;
 import net.minidev.json.annotate.JsonIgnore;
 import org.slf4j.Logger;

@@ -5,8 +5,10 @@ package com.example.thevault.handelingen;
 
 import com.example.thevault.financieel.AssetNotExistsException;
 import com.example.thevault.financieel.Cryptomunt;
+import com.example.thevault.financieel.RootRepositoryFinancieel;
 import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.financieel.Asset;
+import com.example.thevault.klant.RootRepositoryKlant;
 import org.apache.commons.math3.util.Precision;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -4,8 +4,7 @@
 package com.example.thevault.financieel;
 
 import com.example.thevault.handelingen.RootRepositoryHandelingen;
-import com.example.thevault.handelingen.RootRepositoryKlant;
-import com.example.thevault.handelingen.RootRepositoryFinancieel;
+import com.example.thevault.klant.RootRepositoryKlant;
 import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.handelingen.CryptoWaarde;
 import com.fasterxml.jackson.annotation.JsonIgnore;

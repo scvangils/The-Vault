@@ -9,8 +9,7 @@ import com.example.thevault.handelingen.RootRepositoryHandelingen;
 
 import com.example.thevault.financieel.CryptoDto;
 import com.example.thevault.financieel.Asset;
-import com.example.thevault.handelingen.RootRepositoryKlant;
-import com.example.thevault.handelingen.RootRepositoryFinancieel;
+import com.example.thevault.financieel.RootRepositoryFinancieel;
 import com.example.thevault.support.BSNvalidator;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;

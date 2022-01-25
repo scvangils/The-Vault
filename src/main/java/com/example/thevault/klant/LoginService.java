@@ -3,10 +3,9 @@
 
 package com.example.thevault.klant;
 
-import com.example.thevault.handelingen.RootRepositoryFinancieel;
+import com.example.thevault.financieel.RootRepositoryFinancieel;
 import com.example.thevault.handelingen.RootRepositoryHandelingen;
 import com.example.thevault.financieel.RekeningService;
-import com.example.thevault.handelingen.RootRepositoryKlant;
 import com.example.thevault.klant.authorization.AuthorizationService;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;

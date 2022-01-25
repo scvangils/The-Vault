@@ -3,14 +3,10 @@
 
 package com.example.thevault.handelingen;
 
-import com.example.thevault.financieel.Cryptomunt;
-import com.example.thevault.financieel.CryptomuntDAO;
+import com.example.thevault.financieel.*;
 import com.example.thevault.klant.Gebruiker;
 import com.example.thevault.klant.Klant;
 import com.example.thevault.klant.KlantDAO;
-import com.example.thevault.financieel.AssetDAO;
-import com.example.thevault.financieel.Rekening;
-import com.example.thevault.financieel.RekeningDAO;
 import net.minidev.json.annotate.JsonIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
