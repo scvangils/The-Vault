@@ -2,7 +2,7 @@
 // 20210712
 package com.example.thevault.klant.authorization;
 
-import com.example.thevault.klant.Klant;
+import com.example.thevault.klant.model.Klant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

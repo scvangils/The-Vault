@@ -1,6 +1,6 @@
 package com.example.thevault.handelingen.api;
 
-import com.example.thevault.financieel.Cryptomunt;
+import com.example.thevault.financieel.model.Cryptomunt;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;

@@ -3,7 +3,7 @@
 
 package com.example.thevault.klant.authorization;
 
-import com.example.thevault.klant.Klant;
+import com.example.thevault.klant.model.Klant;
 
 
 import java.util.Optional;
