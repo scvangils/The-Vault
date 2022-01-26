@@ -7,7 +7,6 @@ package com.example.thevault.klant;
 import com.example.thevault.financieel.Cryptomunt;
 import com.example.thevault.handelingen.RootRepositoryHandelingen;
 
-import com.example.thevault.financieel.CryptoDto;
 import com.example.thevault.financieel.Asset;
 import com.example.thevault.financieel.RootRepositoryFinancieel;
 import com.example.thevault.support.BSNvalidator;
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Service;
 import java.nio.charset.StandardCharsets;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +29,7 @@ import java.util.List;
 @Service
 public class KlantService{
 
-    private final RootRepositoryHandelingen rootRepositoryHandelingen;
+
     private final RootRepositoryKlant rootRepositoryKlant;
     private final RootRepositoryFinancieel rootRepositoryFinancieel;
 
@@ -43,13 +41,13 @@ public class KlantService{
      * De constructor van de KlantService class voor Spring Boot
      * met dependency injection
      *
-     * @param rootRepositoryHandelingen De class die als facade voor de database dient
+
      */
     @Autowired
-    public KlantService(RootRepositoryHandelingen rootRepositoryHandelingen,
+    public KlantService(
                         RootRepositoryKlant rootRepositoryKlant, RootRepositoryFinancieel rootRepositoryFinancieel) {
         super();
-        this.rootRepositoryHandelingen = rootRepositoryHandelingen;
+
         this.rootRepositoryKlant = rootRepositoryKlant;
         this.rootRepositoryFinancieel = rootRepositoryFinancieel;
         logger.info("New KlantService.");
@@ -76,27 +74,6 @@ public class KlantService{
      */
     public Klant vindKlantById(int gebruikerId){
         return rootRepositoryKlant.vindKlantById(gebruikerId);
-    }
-
-    /**
-     * Author: Carmen
-     * In de portefeuille van de klant worden de assets vervangen door AssetDTO objecten, waarbij alleen de
-     * voor de klant nuttige informatie wordt doorgegeven (deze methode stond eerst in AssetService)
-     * @param klant de klant die de portefeuille oproept
-     * @return List</AssetDto> een lijst met alle assets van de klant, zijnde de portefeuille, in de vorm die voor de
-     * klant meerwaarde heeft
-     */
-
-    public List<CryptoDto> geefNuttigePortefeuille(Klant klant){
-        List<CryptoDto> portefeuilleVoorKlant = new ArrayList<>();
-        for (Cryptomunt cryptomunt : rootRepositoryFinancieel.geefAlleCryptomunten()) {
-            String naam = cryptomunt.getName();
-            String afkorting = cryptomunt.getName();
-            double prijs = rootRepositoryHandelingen.haalMeestRecenteCryptoWaarde(cryptomunt).getWaarde();
-            double aantal = rootRepositoryHandelingen.geefAssetVanGebruikerOrElseNull(klant, cryptomunt);
-            portefeuilleVoorKlant.add(new CryptoDto(naam, afkorting, prijs,aantal));
-        }
-        return portefeuilleVoorKlant;
     }
 
     /**

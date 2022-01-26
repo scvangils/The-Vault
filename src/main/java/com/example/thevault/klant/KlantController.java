@@ -107,7 +107,7 @@ public class KlantController extends BasisApiController {
         return ResponseEntity.ok()
                 .header("Authorization", "Bearer " + jwtToken)
                 .header(HttpHeaders.SET_COOKIE, responseCookie.toString())
-                .body(new WelkomDTO(klant, klantService.geefNuttigePortefeuille(klant)));
+                .body(new WelkomDTO(klant, loginService.geefNuttigePortefeuille(klant)));
     }
 
     private ResponseCookie getResponseCookie(TokenKlantCombinatie tokenKlantCombinatie) {

@@ -3,6 +3,7 @@
 
 package com.example.thevault.klant;
 
+import com.example.thevault.financieel.CryptoDto;
 import com.example.thevault.financieel.RootRepositoryFinancieel;
 import com.example.thevault.handelingen.RootRepositoryHandelingen;
 import com.example.thevault.financieel.RekeningService;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -71,5 +73,8 @@ public class LoginService {
      */
     public Klant vindKlantByGebruikersnaam(String gebruikersnaam){
         return rootRepositoryKlant.vindKlantByGebruikersnaam(gebruikersnaam);
+    }
+    public List<CryptoDto> geefNuttigePortefeuille(Klant klant){
+        return rootRepositoryHandelingen.geefNuttigePortefeuille(klant);
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -328,5 +329,31 @@ public class RootRepositoryHandelingen implements ApplicationListener<ContextRef
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
+    }
+
+    /**
+     * Author: Carmen
+     * In de portefeuille van de klant worden de assets vervangen door AssetDTO objecten, waarbij alleen de
+     * voor de klant nuttige informatie wordt doorgegeven (deze methode stond eerst in AssetService)
+     * @param klant de klant die de portefeuille oproept
+     * @return List</AssetDto> een lijst met alle assets van de klant, zijnde de portefeuille, in de vorm die voor de
+     * klant meerwaarde heeft
+     */
+
+    public List<CryptoDto> geefNuttigePortefeuille(Klant klant){
+        List<CryptoDto> portefeuilleVoorKlant = new ArrayList<>();
+        for (Cryptomunt cryptomunt : geefAlleCryptomunten()) {
+            String naam = cryptomunt.getName();
+            String afkorting = cryptomunt.getName();
+            double prijs = haalMeestRecenteCryptoWaarde(cryptomunt).getWaarde();
+            double aantal = geefAssetVanGebruikerOrElseNull(klant, cryptomunt);
+            portefeuilleVoorKlant.add(new CryptoDto(naam, afkorting, prijs,aantal));
+        }
+        return portefeuilleVoorKlant;
+    }
+
+    //TODO JavaDoc
+    public List<Cryptomunt> geefAlleCryptomunten(){
+        return cryptomuntDAO.geefAlleCryptomunten();
     }
 }

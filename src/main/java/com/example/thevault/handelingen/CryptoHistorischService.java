@@ -59,7 +59,7 @@ public class CryptoHistorischService{
      * @return een array van alle gebruikte cryptomunten
      */
     public Cryptomunt[] maakCryptoMuntArray(){
-        return rootRepositoryHandelingen.rootRepositoryFinancieel.geefAlleCryptomunten().toArray(Cryptomunt[]::new);
+        return rootRepositoryHandelingen.rootRepositoryFinancieel.rootRepositoryHandelingen.geefAlleCryptomunten().toArray(Cryptomunt[]::new);
     }
 
     /**
@@ -70,7 +70,7 @@ public class CryptoHistorischService{
      * @return het corresponderende cryptomunt object of null indien niet aanwezig in de database
      */
     public Cryptomunt getCryptoMuntOpNaam(String naam){
-       return rootRepositoryHandelingen.rootRepositoryFinancieel.geefAlleCryptomunten().stream()
+       return rootRepositoryHandelingen.rootRepositoryFinancieel.rootRepositoryHandelingen.geefAlleCryptomunten().stream()
                .filter(cryptomunt -> cryptomunt.getName().equals(naam)).findFirst().orElse(null);
     }
 

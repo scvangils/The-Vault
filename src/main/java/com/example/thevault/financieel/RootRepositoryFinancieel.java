@@ -3,6 +3,7 @@
 
 package com.example.thevault.financieel;
 
+import com.example.thevault.handelingen.RootRepositoryHandelingen;
 import com.example.thevault.klant.RootRepositoryKlant;
 import com.example.thevault.klant.Gebruiker;
 import net.minidev.json.annotate.JsonIgnore;
@@ -12,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * Deze klasse zorgt ervoor dat de incomplete objecten uit de DAO's volledig gemaakt kunnen worden
@@ -26,6 +25,7 @@ public class RootRepositoryFinancieel implements ApplicationListener<ContextRefr
     @JsonIgnore
     private final Logger logger = LoggerFactory.getLogger(RootRepositoryFinancieel.class);
     public final RootRepositoryKlant rootRepositoryKlant;
+    public final RootRepositoryHandelingen rootRepositoryHandelingen;
 
 
     private final RekeningDAO rekeningDAO;
@@ -43,17 +43,15 @@ public class RootRepositoryFinancieel implements ApplicationListener<ContextRefr
      */
     @Autowired
     public RootRepositoryFinancieel(RekeningDAO rekeningDAO, AssetDAO assetDAO, CryptomuntDAO cryptomuntDAO,
-                                    RootRepositoryKlant rootRepositoryKlant) {
+                                    RootRepositoryKlant rootRepositoryKlant, RootRepositoryHandelingen rootRepositoryHandelingen) {
         super();
         this.rekeningDAO = rekeningDAO;
 
         this.assetDAO = assetDAO;
         this.cryptomuntDAO = cryptomuntDAO;
-
-
-
-
         this.rootRepositoryKlant = rootRepositoryKlant;
+
+        this.rootRepositoryHandelingen = rootRepositoryHandelingen;
         logger.info("New RootRepositoryHandelingen");
     }
 
@@ -122,17 +120,8 @@ public class RootRepositoryFinancieel implements ApplicationListener<ContextRefr
     }
 
     //TODO JavaDoc
-    public Cryptomunt geefCryptomuntByNaam(String cryptoNaam){
-        return cryptomuntDAO.geefCryptomuntByNaam(cryptoNaam);
-    }
-
-    //TODO JavaDoc
     public Cryptomunt geefCryptomunt(int cryptomuntId){
         return cryptomuntDAO.geefCryptomunt(cryptomuntId);
     }
 
-    //TODO JavaDoc
-    public List<Cryptomunt> geefAlleCryptomunten(){
-        return cryptomuntDAO.geefAlleCryptomunten();
-    }
 }
